@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Hello {{request.session.user_first_name}}!</h1>
+    <a href='/logout'>Log Out</a><br>
+    <a href='/job/new'>New Job!</a>
+    <h2>Everyone's Jobs</h2>
+    <table>
+        <thead>
+            <th>Job</th>
+            <th>Location</th>
+            <th>Actions</th>
+        </thead>
+        <tr>{% for job in jobs %}
+            <td>{{job.title}}</td>
+            <td>{{job.location}}</td>
+            <td><a href='/job/{{job.id}}'>View</a>
+            {% if request.session.user_id == job.creator.id %}
+            <a href='/job/{{job.id}}/edit'>Edit</a>
+            <a href='/job/{{job.id}}/remove'>Remove</a>
+            {% endif %}
+            </td>
+        </tr>
+            {% endfor %}
+    </table>
+    
+
+    
+</body>
+</html>

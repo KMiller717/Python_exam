@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Hello {{request.session.user_first_name}}! Let's edit your job!</h1>
+    <a href='/job'>Go to Home Page</a><br>
+    <a href='/logout'>Log Out</a><br>
+    {% for message in messages %}
+    {{message}}
+    {% endfor %}
+    <form action='/job/{{job.id}}/update' method='POST'>
+        {% csrf_token %}
+        Title: <input type='text' name='title' value='{{job.title}}'><br>
+        Description: <input type='text' name='description' value={{job.description}}><br>
+        Location: <input type='text' name='location' value={{job.location}}><br>
+        <input type='submit' value='Submit'>
+    </form>
+    <a href='/job'>Cancel</a>
+        
+</body>
+</html>

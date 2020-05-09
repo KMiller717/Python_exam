@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Hello {{request.session.user_first_name}}! Create a job!</h1><br>
+    <a href='/logout'>Log Out</a>
+    {% for message in messages %}
+    {{message}}
+    {% endfor %}
+    <form action='/job/create_new_job' method='POST'>
+    {% csrf_token %}
+    Title: <input type='text' name='title'><br>
+    Description: <input type='text' name='description'><br>
+    Location: <input type='text' name='location'><br>
+    <input type='submit' value='Submit'>
+    </form>
+    <a href='/job'>Cancel</a>
+</body>
+</html>
